@@ -1,26 +1,35 @@
 import Link from "next/link";
 
 import CategoryChip from "./CategoryChip";
+import Challenge from "@/types";
 
 type CardProps = {
-  id?: number;
-  points?: number;
+  challenge: Challenge;
 };
 
-export default function ChallengeCard({ id, points }: CardProps) {
+export default function ChallengeCard({ challenge }: CardProps) {
   return (
-    <Link href={`/challenges/${id}`}>
+    <div>
       <div className="rounded-lg w-full h-full bg-rowdy-light-blue border border-rowdy-orange/20 shadow-inner shadow-white-50">
         <div className="p-4 flex flex-col gap-y-2">
-          <h3 className="text-xl truncate">Really Long Challenge Name</h3>
+          <Link
+            href={`/challenges/${challenge.id ?? "unknown"}`}
+            className="text-xl truncate"
+          >
+            {challenge.name}
+          </Link>
           <div className="flex gap-1">
-            <CategoryChip id="web" title="Web" color="red-700" />
-            <CategoryChip id="crypto" title="Cryptography" color="orange-700" />
-            <CategoryChip id="scripting" title="Scripting" color="amber-400" />
+            {challenge.categories?.map((category, idx) => (
+              <CategoryChip
+                key={category.toLowerCase() + idx}
+                id={category.toLowerCase()}
+                title={category}
+              />
+            ))}
           </div>
-          <p className="">Points: {points ?? "unknown"}</p>
+          <p>Difficulty: {challenge.difficulty ?? "unknown"}</p>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }

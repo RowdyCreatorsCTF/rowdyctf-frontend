@@ -1,22 +1,28 @@
-import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { auth, currentUser } from "@clerk/nextjs";
 import ChallengeCard from "@/components/ChallengeCard";
+import Challenge from "@/types";
 
-export default function Challenges() {
-  // const { userId: authId } = auth();
+async function getData() {
+  const res = await fetch("http://localhost:1323/api/v1/challenges");
+  // console.log(res.json());
 
-  // const user = await currentUser();
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
 
-  // const searchParams = useSearchParams();
-  // if (searchParams.has("category")) {
-  // }
+  // return JSON.parse(await res.json());
+  return res.json();
+}
+
+export default async function Challenges() {
+  const challenges: Challenge[] = (await getData()).map((challenge: string) =>
+    JSON.parse(challenge)
+  );
 
   return (
-    <div className="flex h-full w-full ">
+    <div className="flex h-full w-full">
       <div className="basis-1/4 p-4">
-        <div className="h-full rounded-xl bg-rowdy-light-blue  border-rowdy-orange/60 shadow-lg shadow-rowdy-orange/20 p-4">
+        <div className="h-full rounded-xl bg-rowdy-light-blue border-rowdy-orange/60 p-4">
           <h2 className="text-4xl mb-3">Challenges</h2>
           <div>
             <h3 className="text-2xl">Categories</h3>
@@ -37,8 +43,8 @@ export default function Challenges() {
         </div>
       </div>
       <div className="p-4 w-full grid grid-cols-3 grid-rows-4 gap-4 overflow-y-scroll">
-        {Array.from(Array(15).keys()).map((i) => (
-          <ChallengeCard key={i} id={i} />
+        {challenges.map((challenge) => (
+          <ChallengeCard key={challenge.id} challenge={challenge} />
         ))}
       </div>
     </div>
