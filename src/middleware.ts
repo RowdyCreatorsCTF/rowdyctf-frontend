@@ -6,16 +6,16 @@ import { NextResponse } from "next/server";
 // See https://clerk.com/docs/references/nextjs/auth-middleware for more information about configuring your Middleware
 export default authMiddleware({
   publicRoutes: ["/", "/challenges", "/leaderboard"],
-  afterAuth(auth, req, evt) {
-    if (
-      req.nextUrl.pathname === "/admin" &&
-      !auth.user?.privateMetadata?.isAdmin
-    ) {
-      return new NextResponse("Not authorized", { status: 403 });
-    } else {
-      return NextResponse.next();
-    }
-  },
+  // afterAuth(auth, req, evt) {
+  //   if (
+  //     req.nextUrl.pathname === "/admin" &&
+  //     !auth.user?.privateMetadata?.isAdmin
+  //   ) {
+  //     return new NextResponse("Not authorized", { status: 403 });
+  //   } else {
+  //     return NextResponse.next();
+  //   }
+  // },
 });
 
 export const config = {
