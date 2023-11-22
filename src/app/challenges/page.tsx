@@ -36,8 +36,8 @@ export default async function Challenges({
         <div className="h-full rounded-xl bg-rowdy-light-blue p-4">
           <h2 className="mb-3 text-4xl">Challenges</h2>
           <div>
-            <h3 className="text-2xl">Categories</h3>
             <nav>
+              <h3 className="text-2xl">Categories</h3>
               <ul className="text-gray-500">
                 <li>
                   <Link href="/challenges?category=web">Web</Link>
@@ -49,6 +49,19 @@ export default async function Challenges({
                   <Link href="/challenges?category=cryptography">
                     Cryptography
                   </Link>
+                </li>
+              </ul>
+              <br />
+              <h3 className="text-2xl">Difficulty</h3>
+              <ul className="text-gray-500">
+                <li>
+                  <Link href="/challenges?difficulty=easy">Easy</Link>
+                </li>
+                <li>
+                  <Link href="/challenges?difficulty=medium">Medium</Link>
+                </li>
+                <li>
+                  <Link href="/challenges?difficulty=hard">Hard</Link>
                 </li>
               </ul>
             </nav>
