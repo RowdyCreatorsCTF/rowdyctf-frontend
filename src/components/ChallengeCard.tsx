@@ -10,11 +10,11 @@ type CardProps = {
 export default function ChallengeCard({ challenge }: CardProps) {
   return (
     <div>
-      <div className="rounded-lg w-full h-full bg-rowdy-light-blue border border-rowdy-orange/20 shadow-inner shadow-white-50">
-        <div className="p-4 flex flex-col gap-y-2">
+      <div className="h-full w-full rounded-xl bg-rowdy-light-blue shadow-md shadow-white/10">
+        <div className="flex flex-col gap-y-2 p-4">
           <Link
-            href={`/challenges/${challenge.id ?? "unknown"}`}
-            className="text-xl truncate"
+            href={`/challenges/${challenge.id}`}
+            className="truncate text-xl"
           >
             {challenge.name}
           </Link>

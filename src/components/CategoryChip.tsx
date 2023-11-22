@@ -10,7 +10,7 @@ export default function CategoryChip({
   return (
     <Link
       href={`/challenges?category=${id}`}
-      className={"rounded-md p-1 text-black bg-blue-500"}
+      className={"rounded-md bg-blue-700 p-1 text-black"}
     >
       {title}
     </Link>

@@ -30,7 +30,7 @@ export default function RootLayout({
         >
           <Navbar />
           <main className="h-[750px] text-gray-300 flex-grow">{children}</main>
-          <Footer />
+          {/* <Footer /> */}
         </body>
       </html>
     </ClerkProvider>
