@@ -3,7 +3,8 @@ type Challenge = {
   name: string;
   points: number;
   categories: string[];
-  difficulty: string;
+  difficulty?: string;
+  expectedTime?: string;
 };
 
 export default Challenge;
