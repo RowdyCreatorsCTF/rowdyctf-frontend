@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* body {} */
+
+.border-light {
+    @apply border border-primary/50;
+}

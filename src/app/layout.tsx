@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Orbitron, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ClerkProvider, auth } from "@clerk/nextjs";
 
+const orbitron = Orbitron({ subsets: ["latin"] });
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,15 +22,22 @@ export default function RootLayout({
 
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" className="bg-neutral">
         <body
-          className={
-            inter.className +
-            " bg-black text-rowdy-orange h-screen w-screen flex flex-col"
-          }
+          className={[
+            orbitron.className,
+            "flex h-screen w-screen flex-col text-primary",
+          ].join(" ")}
         >
           <Navbar />
-          <main className="h-[750px] text-gray-300 flex-grow">{children}</main>
+          <main
+            className={[
+              inter.className,
+              "flex flex-grow flex-col text-gray-300 ",
+            ].join(" ")}
+          >
+            {children}
+          </main>
           {/* <Footer /> */}
         </body>
       </html>

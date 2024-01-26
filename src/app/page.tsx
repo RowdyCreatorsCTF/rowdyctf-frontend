@@ -11,5 +11,7 @@ export default async function Home() {
 
   const user = await currentUser();
 
-  return <div></div>;
+  return (
+    <div className="h-full w-full bg-gradient-to-br from-neutral from-50% via-[rgba(57,0,123,0.8)] via-80% to-neutral to-95%"></div>
+  );
 }
