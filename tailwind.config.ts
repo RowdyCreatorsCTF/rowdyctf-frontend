@@ -10,13 +10,13 @@ const config: Config = {
 
           secondary: "#1E244E",
 
-          accent: "#6B00E6",
+          accent: "#ffaa00",
 
           neutral: "#00031F",
 
           "base-100": "#9ca3af",
 
-          info: "#0d9488",
+          info: "#ffaa00",
 
           success: "hsl(94, 100%, 49%)",
 
@@ -43,6 +43,9 @@ const config: Config = {
         "rowdy-light-blue": "#282F44",
         "rowdy-blue": "#191D32",
         "rowdy-orange": "#f5740a",
+      },
+      fontFamily: {
+        orbitron: ["var(--font-orbitron)"],
       },
     },
   },

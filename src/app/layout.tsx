@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ClerkProvider, auth } from "@clerk/nextjs";
 
-const orbitron = Orbitron({ subsets: ["latin"] });
+const orbitron = Orbitron({ subsets: ["latin"], variable: "--font-orbitron" });
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -22,20 +22,10 @@ export default function RootLayout({
 
   return (
     <ClerkProvider>
-      <html lang="en" className="bg-neutral">
-        <body
-          className={[
-            orbitron.className,
-            "flex h-screen w-screen flex-col text-primary",
-          ].join(" ")}
-        >
+      <html lang="en" className={`${orbitron.variable} bg-neutral`}>
+        <body className={`flex h-screen w-screen flex-col text-primary`}>
           <Navbar />
-          <main
-            className={[
-              inter.className,
-              "flex flex-grow flex-col text-gray-300 ",
-            ].join(" ")}
-          >
+          <main className={`flex flex-grow flex-col text-gray-300 `}>
             {children}
           </main>
           {/* <Footer /> */}

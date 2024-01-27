@@ -18,7 +18,7 @@ export default async function Navbar() {
 
   return (
     <header className="w-screen">
-      <nav className="navbar justify-between border-b border-primary/50 text-primary">
+      <nav className="font-orbitron navbar justify-between border-b border-primary/50 px-8 text-primary">
         <div
           className="flex-1"
           style={{
@@ -26,14 +26,7 @@ export default async function Navbar() {
           }}
         >
           <Link href="/">
-            <h2
-              className={[
-                "ml-3 self-center text-4xl font-semibold",
-                spaceGrotesk.className,
-              ].join(" ")}
-            >
-              RowdyCTF
-            </h2>
+            <h2 className={`self-center text-4xl font-semibold`}>RowdyCTF</h2>
           </Link>
         </div>
         <div className="flex-none">

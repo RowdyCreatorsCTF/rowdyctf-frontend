@@ -1,6 +1,49 @@
 import Link from "next/link";
 import ChallengeCard from "@/components/ChallengeCard";
-import Challenge from "@/types";
+// import Challenge from "@/types";
+import { Orbitron } from "next/font/google";
+
+const orbitron = Orbitron({ subsets: ["latin"], variable: "--font-orbitron" });
+
+// Generate dummy data for challenges grid
+const challenges = [
+  {
+    id: "1",
+    name: "Challenge 1",
+    difficulty: "Easy",
+    categories: ["Web", "Scripting", "Cryptography", "Misc", "Forensics"],
+  },
+  {
+    id: "2",
+    name: "Challenge 2",
+    difficulty: "Medium",
+    categories: ["Cryptography", "Web"],
+  },
+  {
+    id: "3",
+    name: "Challenge 3",
+    difficulty: "Hard",
+    categories: ["Scripting", "Cryptography"],
+  },
+  {
+    id: "4",
+    name: "Challenge 4",
+    difficulty: "Easy",
+    categories: ["Web", "Scripting"],
+  },
+  {
+    id: "5",
+    name: "Challenge 5",
+    difficulty: "Medium",
+    categories: ["Cryptography", "Web"],
+  },
+  {
+    id: "6",
+    name: "Challenge 6",
+    difficulty: "Hard",
+    categories: ["Scripting", "Cryptography"],
+  },
+];
 
 async function getData(category?: SearchParamValue) {
   let res;
@@ -29,15 +72,15 @@ export default async function Challenges({
 }: {
   searchParams: { [key: string]: SearchParamValue };
 }) {
-  const challenges: Challenge[] = (await getData(searchParams["category"])).map(
-    (challenge: string) => JSON.parse(challenge),
-  );
+  // const challenges: Challenge[] = (await getData(searchParams["category"])).map(
+  //   (challenge: string) => JSON.parse(challenge),
+  // );
 
   return (
     <div className="flex gap-4 p-4">
       <div>
-        <div className="border-light rounded-box bg-neutral">
-          <h2 className="mb-3 text-4xl">Challenges</h2>
+        <div className="first-letter h-full rounded-box bg-neutral p-4">
+          <h2 className={"font-orbitron mb-3 text-4xl"}>Challenges</h2>
           <nav>
             <h3 className="text-2xl">Categories</h3>
             <ul className="text-neutral-content">
@@ -70,7 +113,7 @@ export default async function Challenges({
         </div>
       </div>
       <div className="">
-        <div className="grid grid-cols-4 border border-white">
+        <div className="grid grid-cols-3 gap-4 p-2">
           {challenges.map((challenge) => (
             <ChallengeCard key={challenge.id} challenge={challenge} />
           ))}
