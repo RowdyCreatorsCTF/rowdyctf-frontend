@@ -6,11 +6,11 @@ const config: Config = {
     themes: [
       {
         mytheme: {
-          primary: "#5a00c2",
+          primary: "#d7baf5",
 
           secondary: "#1E244E",
 
-          accent: "#ffaa00",
+          accent: "#fffc30",
 
           neutral: "#00031F",
 
