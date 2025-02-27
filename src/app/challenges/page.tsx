@@ -1,62 +1,17 @@
 import Link from "next/link";
 import ChallengeCard from "@/components/ChallengeCard";
 // import Challenge from "@/types";
+import challenges from "@/utils/dummy/challenges";
 import { Orbitron } from "next/font/google";
+import { URLSearchParams } from "url";
 
 const orbitron = Orbitron({ subsets: ["latin"], variable: "--font-orbitron" });
 
-// Generate dummy data for challenges grid
-const challenges = [
-  {
-    id: "1",
-    name: "Challenge 1",
-    difficulty: "Easy",
-    categories: ["Web", "Scripting", "Cryptography", "Misc", "Forensics"],
-  },
-  {
-    id: "2",
-    name: "Challenge 2",
-    difficulty: "Medium",
-    categories: ["Cryptography", "Web"],
-  },
-  {
-    id: "3",
-    name: "Challenge 3",
-    difficulty: "Hard",
-    categories: ["Scripting", "Cryptography"],
-  },
-  {
-    id: "4",
-    name: "Challenge 4",
-    difficulty: "Easy",
-    categories: ["Web", "Scripting"],
-  },
-  {
-    id: "5",
-    name: "Challenge 5",
-    difficulty: "Medium",
-    categories: ["Cryptography", "Web"],
-  },
-  {
-    id: "6",
-    name: "Challenge 6",
-    difficulty: "Hard",
-    categories: ["Scripting", "Cryptography"],
-  },
-];
-
-async function getData(category?: SearchParamValue) {
-  let res;
-  if (category) {
-    res = await fetch(
-      `http://localhost:1323/api/v1/challenges?category=${category}`,
-      {
-        cache: "no-cache",
-      },
-    );
-  } else {
-    res = await fetch("http://localhost:1323/api/v1/challenges");
-  }
+async function getData(queryParams: { [key: string]: string }) {
+  const res = await fetch(
+    "http://localhost:1323/api/v1/challenges?" +
+      new URLSearchParams(queryParams),
+  );
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -65,33 +20,51 @@ async function getData(category?: SearchParamValue) {
   return res.json();
 }
 
-type SearchParamValue = string | undefined;
+// type SearchParamValue = string | undefined;
 
 export default async function Challenges({
   searchParams,
 }: {
-  searchParams: { [key: string]: SearchParamValue };
+  searchParams: { [key: string]: string };
 }) {
   // const challenges: Challenge[] = (await getData(searchParams["category"])).map(
   //   (challenge: string) => JSON.parse(challenge),
   // );
+  //
+
+  const updatedParamRoute = (k: string, v: string) => {
+    return (
+      "/challenges?" + new URLSearchParams({ ...{ [k]: v }, ...searchParams })
+    );
+  };
+
+  // const challenges = await getData(
+  //   Object.entries(searchParams).reduce(
+  //     (a: any, [k, v]) => (v == null ? a : ((a[k] = v), a)),
+  //     {},
+  //   ),
+  // );
+
+  // const challenges = await getData(searchParams);
 
   return (
     <div className="flex gap-4 p-4">
       <div>
         <div className="first-letter h-full rounded-box bg-neutral p-4">
-          <h2 className={"font-orbitron mb-3 text-4xl"}>Challenges</h2>
+          <h2 className={"mb-3 font-orbitron text-4xl"}>Challenges</h2>
           <nav>
             <h3 className="text-2xl">Categories</h3>
             <ul className="text-neutral-content">
               <li>
-                <Link href="/challenges?category=web">Web</Link>
+                <Link href={updatedParamRoute("category", "web")}>Web</Link>
               </li>
               <li>
-                <Link href="/challenges?category=scripting">Scripting</Link>
+                <Link href={updatedParamRoute("category", "scripting")}>
+                  Scripting
+                </Link>
               </li>
               <li>
-                <Link href="/challenges?category=cryptography">
+                <Link href={updatedParamRoute("category", "cryptography")}>
                   Cryptography
                 </Link>
               </li>
@@ -100,13 +73,17 @@ export default async function Challenges({
             <h3 className="text-2xl">Difficulty</h3>
             <ul className="text-neutral-content">
               <li>
-                <Link href="/challenges?difficulty=easy">Easy</Link>
+                <Link href={updatedParamRoute("difficulty", "easy")}>Easy</Link>
               </li>
               <li>
-                <Link href="/challenges?difficulty=medium">Medium</Link>
+                <Link href={updatedParamRoute("difficulty", "medium")}>
+                  Medium
+                </Link>
               </li>
               <li>
-                <Link href="/challenges?difficulty=hard">Hard</Link>
+                <Link href={updatedParamRoute("difficulty", "large")}>
+                  Hard
+                </Link>
               </li>
             </ul>
           </nav>

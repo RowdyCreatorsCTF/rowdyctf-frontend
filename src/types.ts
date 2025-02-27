@@ -1,7 +1,8 @@
 type Challenge = {
   id: string;
   name: string;
-  points: number;
+  description?: string;
+  points?: number;
   categories: string[];
   difficulty?: string;
   expectedTime?: string;
